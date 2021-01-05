@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useRef, KeyboardEvent } from 'react';
+import { ReactElement, useState, useRef, KeyboardEvent } from 'react';
 import { FieldAction, TextConfig, InputConfig } from './component-model';
 import { getThemeClassName, debounce, validate, updateValidatorConfig } from '../utils';
 import { FieldValidatorType } from '../shared-model';

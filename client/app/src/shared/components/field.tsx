@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { FieldConfig, FieldType, TextConfig, FieldActionEvent } from './component-model';
 import { Text } from './text';
 import { getThemeClassName } from '../utils';

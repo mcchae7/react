@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { FormConfig, FormAction, FieldValidatorResult } from './component-model';
 import { getThemeClassName } from '../utils';
 

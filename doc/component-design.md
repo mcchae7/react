@@ -66,7 +66,7 @@ export enum FieldAction {
 e.g) Text Component
 
 ```Javascript
-import React, { ReactElement, ChangeEvent } from 'react';
+import { ReactElement, ChangeEvent } from 'react';
 import { FieldAction, FieldConfig } from './component-model';
 
 export const Text = (config: FieldConfig): ReactElement => {
