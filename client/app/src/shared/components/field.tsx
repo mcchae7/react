@@ -60,8 +60,8 @@ export const Field = (props: FieldConfig): ReactElement => {
             <Text {...textConfig} />
           </div>
           <div className="field-error">
-            {state.errorMessages?.map((message, i) => (
-              <div className="field-error-message" key={i}>
+            {state.errorMessages?.map((message) => (
+              <div className="field-error-message" key={message}>
                 {message}
               </div>
             ))}
