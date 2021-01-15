@@ -8,7 +8,7 @@ interface TextState {
 }
 
 export const Text = (props: TextConfig): ReactElement => {
-  const componentName = 'field';
+  const componentName = 'text';
 
   // init
   const {

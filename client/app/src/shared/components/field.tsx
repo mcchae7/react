@@ -22,6 +22,7 @@ export const Field = (props: FieldConfig): ReactElement => {
     debounceTime,
     onAction,
   } = props;
+
   const [state, setState] = useState<FieldState>({
     className: getThemeClassName(componentName, themes),
     errorMessages: [],

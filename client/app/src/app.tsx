@@ -8,7 +8,8 @@ import { Home } from './pages/home/home';
 
 export const App = (): ReactElement => {
   const [user, setUser] = useState(getEmptyUser());
-  // for re-use the existing value unless it is changed. It will reduce the rendering because it will skip the same value.
+  // for re-use the existing value unless it is changed.
+  // It will reduce the rendering because it will skip the same value.
   const userContextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (

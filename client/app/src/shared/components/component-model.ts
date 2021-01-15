@@ -118,6 +118,8 @@ export enum ButtonAction {
 
 export enum FieldAction {
   change = 'change',
+  focus = 'focus',
+  blur = 'blur',
 }
 
 export enum FieldType {

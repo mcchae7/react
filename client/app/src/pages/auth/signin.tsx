@@ -14,6 +14,7 @@ import {
   UserAction,
   User,
   FieldAction,
+  FieldValidatorType,
 } from '../../shared';
 import { api } from '../../shared/utils/http-util';
 
@@ -70,15 +71,18 @@ export const Signin = (): ReactElement => {
             name="email"
             label="Email: "
             type={FieldType.email}
+            validators={[{ type: FieldValidatorType.required }]}
             onAction={(e: FieldActionEvent) => onFieldAction(e)}
           ></Field>
           <Field
+            themes={themes}
             label="Password: "
             name="password"
             type={FieldType.password}
+            validators={[{ type: FieldValidatorType.required }]}
             onAction={(e: FieldActionEvent) => onFieldAction(e)}
           ></Field>
-          <Button themes={['signin']} type={ButtonType.submit}>
+          <Button themes={themes} type={ButtonType.submit}>
             Sign In
           </Button>
         </Form>
