@@ -17,7 +17,6 @@ export interface FieldConfig extends ComponentConfig {
   name: string;
   type?: FieldType;
   value?: unknown;
-  targetValue?: unknown;
   label?: string;
   placeholder?: string;
   readOnly?: boolean;

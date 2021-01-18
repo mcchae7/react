@@ -35,7 +35,7 @@ export function minValidator(config: FieldValidatorConfig): FieldValidatorResult
     label,
     value,
     targetValue,
-    errorMessage = `${field || label} should be bigger than ${targetValue}`,
+    errorMessage = `${field || label} should follow the pattern`,
   } = config;
   return {
     field,
@@ -99,14 +99,15 @@ export function patternValidator(config: FieldValidatorConfig): FieldValidatorRe
     label,
     value,
     targetValue,
-    errorMessage = `${field || label} should be longer than ${targetValue}`,
+    errorMessage = `${field || label} should follow the pattern`,
   } = config;
-  const re = new RegExp(targetValue + '', 'g');
+  const re = new RegExp(targetValue as string | RegExp, 'g');
+  const valid = isEmpty(value) || re.test('' + value);
   return {
     field,
     errorMessage,
     value,
-    valid: isEmpty(value) || re.test('' + value),
+    valid,
   };
 }
 
@@ -157,9 +158,11 @@ export function validate(configs: FieldValidatorConfig[]): FieldValidatorsResult
     results.push(result);
     resultMap.set(field, results);
   });
-  return {
+  const re = {
     resultMap,
     valid,
     errorMessages,
   };
+  // console.log(re);
+  return re;
 }

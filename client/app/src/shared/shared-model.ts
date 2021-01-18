@@ -77,3 +77,7 @@ export enum FieldValidatorType {
   required = 'required',
   pattern = 'pattern',
 }
+
+// ***** const *******
+
+export const RegExpEmail = /\S+@\S+\.\S+/;

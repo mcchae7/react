@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 import { FieldConfig, FieldType, TextConfig, FieldActionEvent } from './component-model';
 import { Text } from './text';
-import { getThemeClassName } from '../utils';
+import { getThemeClassName, isEmpty } from '../utils';
 
 interface FieldState {
   className: string;
@@ -15,18 +15,20 @@ export const Field = (props: FieldConfig): ReactElement => {
     type = FieldType.text,
     label,
     name,
-    value = '',
+    value,
     placeholder,
     readOnly,
     disabled,
     debounceTime,
+    validators,
     onAction,
   } = props;
 
-  const [state, setState] = useState<FieldState>({
+  const defaultState = {
     className: getThemeClassName(componentName, themes),
     errorMessages: [],
-  });
+  };
+  const [state, setState] = useState<FieldState>(defaultState);
 
   const onFieldAction = (e: FieldActionEvent) => {
     const { valid, validatorsResult } = e;
@@ -35,6 +37,8 @@ export const Field = (props: FieldConfig): ReactElement => {
         className: getThemeClassName(componentName, themes, ['invalid']),
         errorMessages: validatorsResult?.errorMessages,
       });
+    } else {
+      setState(defaultState);
     }
     if (onAction) {
       onAction(e);
@@ -47,11 +51,12 @@ export const Field = (props: FieldConfig): ReactElement => {
         themes,
         type,
         name,
-        value: value + '',
+        value: isEmpty(value) ? '' : value + '',
         placeholder,
         readOnly,
         disabled,
         debounceTime,
+        validators,
         onAction: (e) => onFieldAction(e),
       };
       return (

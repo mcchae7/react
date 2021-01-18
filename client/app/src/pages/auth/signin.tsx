@@ -15,6 +15,7 @@ import {
   User,
   FieldAction,
   FieldValidatorType,
+  RegExpEmail,
 } from '../../shared';
 import { api } from '../../shared/utils/http-util';
 
@@ -71,7 +72,14 @@ export const Signin = (): ReactElement => {
             name="email"
             label="Email: "
             type={FieldType.email}
-            validators={[{ type: FieldValidatorType.required }]}
+            validators={[
+              { type: FieldValidatorType.required },
+              {
+                type: FieldValidatorType.pattern,
+                targetValue: RegExpEmail,
+                errorMessage: 'Please input the correct email',
+              },
+            ]}
             onAction={(e: FieldActionEvent) => onFieldAction(e)}
           ></Field>
           <Field

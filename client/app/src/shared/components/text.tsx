@@ -18,9 +18,8 @@ export const Text = (props: TextConfig): ReactElement => {
     value = '',
     label,
     placeholder = label || name,
-    readOnly,
-    disabled,
-    targetValue,
+    readOnly = false,
+    disabled = false,
     validators = [],
     debounceTime = 0,
     onAction,
@@ -32,22 +31,25 @@ export const Text = (props: TextConfig): ReactElement => {
     className: getThemeClassName(componentName, themes),
   });
 
+  const validateValue = (value: unknown) => {
+    const validatorConfigs = updateValidatorConfig(validators, {
+      field: name,
+      label,
+      value,
+    });
+    const validatorsResult = validate(validatorConfigs);
+    const { valid } = validatorsResult;
+    if (!valid) {
+      setState({ className: getThemeClassName(componentName, themes, ['invalid']) });
+    }
+    return { valid, validatorsResult };
+  };
+
   const getInputConfig = () => {
     const _onKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
       if (inputEl.current) {
         const { value } = inputEl.current;
-        // const { key } = e;
-        const validatorConfigs = updateValidatorConfig(validators, {
-          field: name,
-          label,
-          value,
-          targetValue,
-        });
-        const validatorsResult = validate(validatorConfigs);
-        const { valid } = validatorsResult;
-        if (!valid) {
-          setState({ className: getThemeClassName(componentName, themes, ['invalid']) });
-        }
+        const { valid, validatorsResult } = validateValue(value);
         if (onAction) {
           onAction({ event, action: FieldAction.change, name, value, valid, validatorsResult });
         }
