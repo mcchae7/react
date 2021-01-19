@@ -1,7 +1,8 @@
-import { ReactElement, useState, useRef, KeyboardEvent } from 'react';
+import { ReactElement, useState, useRef, KeyboardEvent, FocusEvent, SyntheticEvent } from 'react';
 import { FieldAction, TextConfig, InputConfig } from './component-model';
 import { getThemeClassName, debounce, validate, updateValidatorConfig } from '../utils';
 import { FieldValidatorType } from '../shared-model';
+import './text.scss';
 
 interface TextState {
   className: string;
@@ -31,38 +32,44 @@ export const Text = (props: TextConfig): ReactElement => {
     className: getThemeClassName(componentName, themes),
   });
 
-  const validateValue = (value: unknown) => {
-    const validatorConfigs = updateValidatorConfig(validators, {
-      field: name,
-      label,
-      value,
-    });
-    const validatorsResult = validate(validatorConfigs);
-    const { valid } = validatorsResult;
-    if (!valid) {
-      setState({ className: getThemeClassName(componentName, themes, ['invalid']) });
+  const validateValue = (event: SyntheticEvent) => {
+    if (inputEl.current) {
+      const { value } = inputEl.current;
+      const validatorConfigs = updateValidatorConfig(validators, {
+        field: name,
+        label,
+        value,
+      });
+      const validatorsResult = validate(validatorConfigs);
+      const { valid } = validatorsResult;
+      if (!valid) {
+        setState({ className: getThemeClassName(componentName, themes, ['invalid']) });
+      }
+      if (onAction) {
+        onAction({ event, action: FieldAction.change, name, value, valid, validatorsResult });
+      }
     }
-    return { valid, validatorsResult };
   };
 
   const getInputConfig = () => {
     const _onKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (inputEl.current) {
-        const { value } = inputEl.current;
-        const { valid, validatorsResult } = validateValue(value);
-        if (onAction) {
-          onAction({ event, action: FieldAction.change, name, value, valid, validatorsResult });
-        }
-      }
+      console.log(event);
+      validateValue(event);
+    };
+    const onFocus = (event: FocusEvent) => {
+      validateValue(event);
     };
     const onKeyUp = debounce(_onKeyUp, debounceTime);
     const inputConfig: InputConfig = {
       name,
       type,
+      defaultValue: value,
       placeholder,
       readOnly,
       disabled,
+      autoComplete: 'off',
       onKeyUp: (e) => onKeyUp(e),
+      onFocus: (e) => onFocus(e),
     };
     validators.forEach((validator) => {
       switch (validator.type) {
@@ -77,9 +84,6 @@ export const Text = (props: TextConfig): ReactElement => {
           break;
         case FieldValidatorType.maxLength:
           inputConfig.maxlength = Number(validator.targetValue);
-          break;
-        case FieldValidatorType.pattern:
-          inputConfig.pattern = validator.targetValue + '';
           break;
         case FieldValidatorType.required:
           inputConfig.required = true;

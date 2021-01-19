@@ -68,7 +68,7 @@ export const Signin = (): ReactElement => {
       <main>
         <Form values={state.values} onAction={(e) => onFormAction(e)}>
           <Field
-            themes={themes}
+            themes={[...themes, 'email']}
             name="email"
             label="Email: "
             type={FieldType.email}
@@ -83,7 +83,7 @@ export const Signin = (): ReactElement => {
             onAction={(e: FieldActionEvent) => onFieldAction(e)}
           ></Field>
           <Field
-            themes={themes}
+            themes={[...themes, 'password']}
             label="Password: "
             name="password"
             type={FieldType.password}

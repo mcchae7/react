@@ -8,14 +8,11 @@ import { Home } from './pages/home/home';
 
 export const App = (): ReactElement => {
   const [user, setUser] = useState(getEmptyUser());
-  // for re-use the existing value unless it is changed.
-  // It will reduce the rendering because it will skip the same value.
-  const userContextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
     <Router>
       <Fragment>
-        <UserContext.Provider value={userContextValue}>
+        <UserContext.Provider value={{ user, setUser }}>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/signin" render={() => (user.user_id > -1 ? <Redirect to="/" /> : <Signin />)} />

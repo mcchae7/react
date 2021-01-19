@@ -1,0 +1,9 @@
+.nu-text {
+  border: 1px solid black;
+  &:focus {
+    outline: none;
+  }
+  &.invalid {
+    border-color: red;
+  }
+}

@@ -1,0 +1,9 @@
+.nu-field {
+  &-password {
+    .field-error {
+      &-message {
+        color: blue;
+      }
+    }
+  }
+}

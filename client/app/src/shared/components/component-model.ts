@@ -1,4 +1,4 @@
-import { PropsWithChildren, ChangeEvent, SyntheticEvent, KeyboardEvent } from 'react';
+import { PropsWithChildren, ChangeEvent, SyntheticEvent, KeyboardEvent, FocusEvent } from 'react';
 import { FieldValidatorConfig } from '../shared-model';
 
 /************ Interfaces *************/
@@ -35,7 +35,7 @@ export interface InputConfig {
   className?: string;
   name: string;
   type?: string;
-  value?: string;
+  defaultValue?: string;
   placeholder?: string;
   readOnly?: boolean;
   disabled?: boolean;
@@ -45,10 +45,12 @@ export interface InputConfig {
   maxlength?: number;
   required?: boolean;
   pattern?: string;
+  autoComplete?: string;
   onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (event: FocusEvent) => void;
 }
 
 export interface FormConfig extends ComponentConfig {

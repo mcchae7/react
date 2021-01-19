@@ -2,6 +2,8 @@ import { ReactElement, useState } from 'react';
 import { FieldConfig, FieldType, TextConfig, FieldActionEvent } from './component-model';
 import { Text } from './text';
 import { getThemeClassName, isEmpty } from '../utils';
+import './field.scss';
+import './field.themes.scss';
 
 interface FieldState {
   className: string;
