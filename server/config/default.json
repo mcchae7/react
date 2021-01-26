@@ -1,0 +1,10 @@
+{
+  "pg": {
+    "user": "neo-admin",
+    "host": "localhost",
+    "database": "neo",
+    "password": "1092",
+    "port": 5432
+  },
+  "pgUrl": "postgres://neo-admin:neo@localhost:5432/neo"
+}

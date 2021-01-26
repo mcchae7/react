@@ -1,7 +1,7 @@
 import { User } from '../shared-model';
 
 export const getEmptyUser = (): User => ({
-  user_id: -1,
-  user_name: '',
+  id: -1,
+  name: '',
   email: '',
 });

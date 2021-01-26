@@ -1,6 +1,7 @@
 import { FieldValidatorResult, FieldValidatorsResult } from '../components/component-model';
 import { isEmpty, isEqualText } from './util';
 import { FieldValidatorConfig, FieldValidatorType } from '../shared-model';
+
 export function requiredValidator(config: FieldValidatorConfig): FieldValidatorResult {
   const { field = '', label, value, errorMessage = `${field || label} is required` } = config;
   return {

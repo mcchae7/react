@@ -64,5 +64,6 @@
     "*.{js,ts,tsx}": [
       "eslint --quiet --fix"
     ]
-  }
+  },
+  "proxy": "http://localhost:8091"
 }

@@ -1,8 +1,10 @@
 .nu-field {
-  &-password {
-    .field-error {
-      &-message {
-        color: blue;
+  &-sign-in {
+    &.nu-field-password {
+      .field-error {
+        &-message {
+          color: blue;
+        }
       }
     }
   }

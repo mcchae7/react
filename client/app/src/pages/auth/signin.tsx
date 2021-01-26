@@ -25,7 +25,7 @@ interface SignInState {
 }
 
 export const Signin = (): ReactElement => {
-  const themes: string[] = ['sign-in'];
+  const themes: string[] = ['signin'];
   const { setUser } = useContext(UserContext);
   const [state, setState] = useState<SignInState>({
     values: {},
@@ -40,7 +40,7 @@ export const Signin = (): ReactElement => {
           action: UserAction.auth,
           data: values,
         });
-        const user = res.data as User;
+        const user = res.data.data as User;
         setUser(user);
         setState({ ...state, redirectTo: '/' });
         break;
